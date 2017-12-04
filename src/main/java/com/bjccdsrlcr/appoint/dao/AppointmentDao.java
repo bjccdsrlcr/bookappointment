@@ -11,6 +11,6 @@ public interface AppointmentDao {
 	 
 	//通过一个学生ID查询已经预约了哪些书。
 	List<Appointment> query(long studentId);
-//	//查询所有已经预约书籍，暂时不开发管理员界面
+	//查询所有已经预约书籍，暂时不开发管理员界面
 //	List<Appointment> queryAll(@Param("offset") int offset,@Param("limit") int limit);
 }

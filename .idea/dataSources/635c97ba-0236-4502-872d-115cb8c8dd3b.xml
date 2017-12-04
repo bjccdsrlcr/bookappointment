@@ -14,86 +14,106 @@
     <schema id="9" parent="1" name="innodb">
       <Visible>1</Visible>
     </schema>
-    <table id="10" parent="9" name="appointment">
+    <table id="10" parent="9" name="admin">
+      <Comment>管理员表</Comment>
+    </table>
+    <table id="11" parent="9" name="appointment">
       <Comment>预约图书表</Comment>
     </table>
-    <table id="11" parent="9" name="book">
+    <table id="12" parent="9" name="book">
       <Comment>图书表</Comment>
     </table>
-    <table id="12" parent="9" name="student">
+    <table id="13" parent="9" name="student">
       <Comment>学生统计表</Comment>
     </table>
-    <column id="13" parent="10" name="book_id">
+    <column id="14" parent="10" name="admin_id">
+      <Position>1</Position>
+      <Comment>管理员ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="10" name="password">
+      <Position>2</Position>
+      <Comment>管理员密码</Comment>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="16" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>admin_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="17" parent="11" name="book_id">
       <Position>1</Position>
       <Comment>图书ID</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="10" name="student_id">
+    <column id="18" parent="11" name="student_id">
       <Position>2</Position>
       <Comment>学号</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="10" name="appoint_time">
+    <column id="19" parent="11" name="appoint_time">
       <Position>3</Position>
       <Comment>预约时间</Comment>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <index id="16" parent="10" name="idx_appoint_time">
+    <index id="20" parent="11" name="idx_appoint_time">
       <ColNames>appoint_time</ColNames>
     </index>
-    <key id="17" parent="10" name="PRIMARY">
+    <key id="21" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>book_id
 student_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="18" parent="11" name="book_id">
+    <column id="22" parent="12" name="book_id">
       <Position>1</Position>
       <Comment>图书ID</Comment>
       <DataType>int(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="19" parent="11" name="name">
+    <column id="23" parent="12" name="name">
       <Position>2</Position>
       <Comment>图书名称</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="20" parent="11" name="introd">
+    <column id="24" parent="12" name="introd">
       <Position>3</Position>
       <Comment>图书介绍</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="21" parent="11" name="number">
+    <column id="25" parent="12" name="number">
       <Position>4</Position>
       <Comment>馆藏数量</Comment>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="22" parent="11" name="PRIMARY">
+    <key id="26" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>book_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="23" parent="12" name="student_id">
+    <column id="27" parent="13" name="student_id">
       <Position>1</Position>
       <Comment>学生ID</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="12" name="password">
+    <column id="28" parent="13" name="password">
       <Position>2</Position>
       <Comment>密码</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="25" parent="12" name="PRIMARY">
+    <key id="29" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>student_id</ColNames>
       <Primary>1</Primary>

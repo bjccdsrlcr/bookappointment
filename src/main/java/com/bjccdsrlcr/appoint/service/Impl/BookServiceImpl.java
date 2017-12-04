@@ -1,10 +1,12 @@
 package com.bjccdsrlcr.appoint.service.Impl;
 
 
+import com.bjccdsrlcr.appoint.dao.AdminDao;
 import com.bjccdsrlcr.appoint.dao.AppointmentDao;
 import com.bjccdsrlcr.appoint.dao.BookDao;
 import com.bjccdsrlcr.appoint.dao.StudentDao;
 import com.bjccdsrlcr.appoint.dto.AppointExecution;
+import com.bjccdsrlcr.appoint.entity.Admin;
 import com.bjccdsrlcr.appoint.entity.Appointment;
 import com.bjccdsrlcr.appoint.entity.Book;
 import com.bjccdsrlcr.appoint.entity.Student;
@@ -13,6 +15,7 @@ import com.bjccdsrlcr.appoint.exception.AppointException;
 import com.bjccdsrlcr.appoint.exception.NoNumberException;
 import com.bjccdsrlcr.appoint.exception.RepeatAppoint;
 import com.bjccdsrlcr.appoint.service.BookService;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,8 @@ public class BookServiceImpl implements BookService{
 	private AppointmentDao appointmentDao;
 	@Autowired
 	private StudentDao studentDao;
+	@Autowired
+	private AdminDao adminDao;
 
 	public Book getById(long bookId) {
 		return bookDao.queryById(bookId);
@@ -40,18 +45,19 @@ public class BookServiceImpl implements BookService{
 		return bookDao.queryAll(0, 1000);
 	} 
 
-	public Student validateStu(Long studentId, Long password){
+	public Student validateStu(String studentId, String password){
 		return studentDao.quaryStudent(studentId, password);
 	}
-
+	public Admin validateAdmin(Long adminId, String password){
+		return adminDao.queryAdmin(adminId, password);
+	}
 	public List<Book> getSomeList(String name) {
 		 
 		return bookDao.querySome(name);
 	} 
 
-	public List<Appointment> getAppointByStu(long studentId) {//DOTO
+	public List<Appointment> getAppointByStu(long studentId) {
 		return appointmentDao.query(studentId);
-		 
 	}
 
 	public void addBook(long book_id, String name, String introd, int number) {

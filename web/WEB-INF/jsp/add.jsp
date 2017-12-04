@@ -36,11 +36,34 @@
                 <label for="bookNumberKey">图书数量</label>
                 <input type="text" class="form-control" id="bookNumberKey" name="bookNumber" placeholder="书籍数量">
             </div>
-            <button type="submit" class="btn btn-default" id="addBtn">添加</button>
+            <span id="addMessage" class="glyphicon"> </span>
+                <button type="button" id="addBtn" class="btn btn-success">
+                    <span class="glyphicon glyphicon-student"></span>
+                    Submit
+                </button>
         </form>
 
 
     </div>
+    <div id="addResultModel" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">
+                    <span class="glyphicon glyphicon-studentId"> </span>提示信息：
+                </h3>
+            </div>
+
+            <div class="modal-body">
+                <h4 id="resultMessage"></h4>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">关闭</a>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 
