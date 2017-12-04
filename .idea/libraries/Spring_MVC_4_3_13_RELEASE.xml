@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Spring MVC-4.3.13.RELEASE" type="spring-mvc">
+    <properties version="4.3.13.RELEASE" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../ssm-BookAppointment/lib/spring-webmvc-portlet-4.3.13.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ssm-BookAppointment/lib/spring-websocket-4.3.13.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ssm-BookAppointment/lib/spring-webmvc-4.3.13.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ssm-BookAppointment/lib/spring-web-4.3.13.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

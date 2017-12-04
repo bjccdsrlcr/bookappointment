@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="sampledb@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="sampledb">
+      <Current>1</Current>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sakila"/>
+    <schema id="7" parent="1" name="sys"/>
+    <schema id="8" parent="1" name="world"/>
+    <schema id="9" parent="1" name="innodb">
+      <Visible>1</Visible>
+    </schema>
+    <table id="10" parent="9" name="appointment">
+      <Comment>预约图书表</Comment>
+    </table>
+    <table id="11" parent="9" name="book">
+      <Comment>图书表</Comment>
+    </table>
+    <table id="12" parent="9" name="student">
+      <Comment>学生统计表</Comment>
+    </table>
+    <column id="13" parent="10" name="book_id">
+      <Position>1</Position>
+      <Comment>图书ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="10" name="student_id">
+      <Position>2</Position>
+      <Comment>学号</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="10" name="appoint_time">
+      <Position>3</Position>
+      <Comment>预约时间</Comment>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="16" parent="10" name="idx_appoint_time">
+      <ColNames>appoint_time</ColNames>
+    </index>
+    <key id="17" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>book_id
+student_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="18" parent="11" name="book_id">
+      <Position>1</Position>
+      <Comment>图书ID</Comment>
+      <DataType>int(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="19" parent="11" name="name">
+      <Position>2</Position>
+      <Comment>图书名称</Comment>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="20" parent="11" name="introd">
+      <Position>3</Position>
+      <Comment>图书介绍</Comment>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="21" parent="11" name="number">
+      <Position>4</Position>
+      <Comment>馆藏数量</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="22" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>book_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="23" parent="12" name="student_id">
+      <Position>1</Position>
+      <Comment>学生ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="12" name="password">
+      <Position>2</Position>
+      <Comment>密码</Comment>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="25" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>student_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
