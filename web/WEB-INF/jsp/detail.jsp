@@ -74,7 +74,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title text-center">
-                    <span class="glyphicon glyphicon-studentId">请输入帐号密码：</span>
+                    <span id="userText" class="glyphicon glyphicon-studentId"></span>
                 </h3>
             </div>
             <div class="modal-body">
@@ -118,7 +118,6 @@
         //使用EL表达式传入参数
         bookappointment.detail.init({
             bookId:${book.bookId}  
-             
         });
     })
 </script>

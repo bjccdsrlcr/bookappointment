@@ -30,6 +30,7 @@
         					</th>
         					<th>
         						<input type="submit" id="tabSub" value="检索" />
+                                <button type="button" class="btn btn-info" id="clearCache">清除缓存</button>
         					</th>
                             <th>
                                 <button type="button" class="btn btn-info" id="addBook" style="float: right;">添加图书</button>
@@ -45,13 +46,13 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>图书ID</th>
+                    <th><a id="bookID"></a>图书ID</th>
                     <th>图书名称</th>
-                    <th>馆藏数量</th>
+                    <th><a id="number">馆藏数量</a></th>
                     <th>详细</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="bookList">
                 <c:forEach items="${list}" var="sk">
                     <tr>
                         <td>${sk.bookId}</td>
@@ -61,6 +62,8 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+                <tbody id="asecList"></tbody>
+                <tbody id="descList"></tbody>
             </table>
         </div>
 
@@ -75,6 +78,7 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="/resources/script/bookappointment.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {

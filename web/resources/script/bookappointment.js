@@ -74,14 +74,94 @@ var bookappointment={
 		list:{
 		    //跳转添加书籍页面
 		    toAddPage:function(){
-			var addUrl = bookappointment.URL.addBook();
-			window.location.href = bookappointment.URL.IP()+addUrl;
+				var addUrl = bookappointment.URL.addBook();
+				window.location.href = bookappointment.URL.IP()+addUrl;
+            },
+			sortList:function (clicker) {
+
             },
 		    init:function () {
-		    	//console.log($.cookie('userType'));
+		    	var userType = $.cookie('userType');
+		    	// 当前用户为管理员，添加图书按钮才可见
+		    	if(userType == 'student'){
+		    		$('#addBook').hide();
+				}
                 $('#addBook').click(function () {
                         bookappointment.list.toAddPage();
-                    });
+				});
+		    	//清除当前页面的缓存- userId, password, userType
+		    	$('#clearCache').click(function () {
+					$.cookie('userId', '', {path: '/books'});
+					$.cookie('password', '', {path: '/books'});
+                });
+		    	var adescValue = 1;
+		    	var ascFirst = 0;
+		    	var descFirst = 0;
+		    	var sortList = [];
+		    	// 点击数量进行排序并显示
+		    	$('#number').click(function () {
+					var sortUrl = '/books/sort';
+					var params={};
+					var sortType = 'number';
+		    		if(adescValue == 1){
+		    			//判断是否第一次排序，如果是第二次排序会导致结果重复一遍，所以需要增加该判断
+		    			if(ascFirst == 0){
+		    				console.log("in this function");
+							params['sortType'] = sortType;
+							params['count'] = adescValue;
+		    				$('#bookList').hide();
+							$.ajax({
+								type: 'get',
+								url: '/books'+ '/sort',
+								data: params,
+								async: false,
+								success:function (result) {
+							 	$(function () {
+							 	 	sortList = result;
+								 	for(var i = 0; i< result.length; i++){
+										$('#asecList').append(
+											'<tr>'+
+											'<td> '+result[i].bookId+'</td>'+
+											'<td> '+result[i].name+' </td>'+
+											'<td> '+result[i].number+ '</td>'+
+											'<td><a class="btn btn-info" href="/books/'+result[i].bookId+'/detail" >详细</a></td>'+
+											'</tr>');
+										}
+										$('#asecList').html();
+        							});
+                        		}
+							});
+							ascFirst = 1;
+						}else{
+		    				console.log("ascFirst:" + ascFirst);
+							$('#asecList').show();
+							$('#descList').hide();
+						}
+						adescValue = 0;
+					}else if(adescValue == 0){
+		    			// 从后台获取降序的数据；
+						// 不需要通过ajax， 代码太繁琐， 虽然后台实现了逻辑，不如直接在js里面实现
+						$('#asecList').hide();
+						var result = sortList.reverse();
+						console.log(result);
+						if(descFirst == 0){
+							for(var i = 0; i< result.length; i++){
+							console.log(result[i].number);
+							$('#descList').append(
+								'<tr>'+
+								'<td> '+result[i].bookId+'</td>'+
+								'<td> '+result[i].name+' </td>'+
+								'<td> '+result[i].number+ '</td>'+
+								'<td><a class="btn btn-info" href="/books/'+result[i].bookId+'/detail" >详细</a></td>'+
+								'</tr>');
+							descFirst = 1;
+							}
+						}
+						console.log(result.length);
+						$('#descList').show();
+						adescValue = 1;
+					}
+                });
             }
         },
         //添加书籍页面
@@ -171,7 +251,6 @@ var bookappointment={
 				console.log("页面详情初始化--");
 				var userId=$.cookie('userId');
 				var password=$.cookie('password');
-				console.log(userId, password, "---",$.cookie('userType'));
 				var userType = '';
 				if(!userId||!password){
 					//设置弹出层属性
@@ -188,6 +267,7 @@ var bookappointment={
 	                    	backdrop: 'static',//禁止位置关闭
 	                    	keyboard: false//关闭键盘事件
 						});
+						$('#userText').html("<h3>学生登录</h3>");
 						userType = 'student';
                     });
 					$('#adminLogin').click(function () {
@@ -196,6 +276,7 @@ var bookappointment={
 	                    	backdrop: 'static',//禁止位置关闭
 	                    	keyboard: false//关闭键盘事件
 						});
+						$('#userText').html("<h3>管理员登录</h3>");
 						userType = 'admin';
                     });
 					$('#userBtn').click(function (){

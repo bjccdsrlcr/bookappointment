@@ -4,7 +4,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bjccdsrlcr.appoint.dao.BookDao">
 	<select id="queryById" parameterType="long" resultType="com.bjccdsrlcr.appoint.entity.Book" >
-		<!-- 具体的sql -->
 		SELECT
 			book_id,
 			name,
@@ -47,8 +46,20 @@
 	</update>
 	
 	<insert id="addBook" parameterType="com.bjccdsrlcr.appoint.entity.Book">
-			INSERT INTO book(book_id, name, introd, number)
-					VALUES (#{0}, #{1}, #{2}, #{3})
+		INSERT INTO
+			book(book_id, name, introd, number)
+		VALUES (#{0}, #{1}, #{2}, #{3})
 	</insert>
 
+	<select id="sortByNumber" resultType="com.bjccdsrlcr.appoint.entity.Book">
+		SELECT
+			book_id,
+			name,
+			introd,
+			number
+		FROM
+			book
+		ORDER BY
+			number
+	</select>
 </mapper>

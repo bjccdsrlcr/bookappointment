@@ -2,10 +2,7 @@ package com.bjccdsrlcr.appoint.web;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -49,13 +46,33 @@ public class BookController {
         method = RequestMethod.GET
     )
     private String List(Model model) {
-        List<Book> list = bookService.getList();
-
+        List<Book> list = bookService.getList();;
         model.addAttribute("list", list);
-
         return "list";
     }
 
+    @RequestMapping(value = "/sort", method = RequestMethod.GET)
+    @ResponseBody
+    private List<Book> sortedList(Model model, HttpServletRequest request, HttpServletResponse response) {
+        String sortType = request.getParameter("sortType");
+        String count = request.getParameter("count");
+        List<Book> list = bookService.getList();
+        // 注意这里不能用sortType == number;
+        if(sortType.equals("number") && count.equals("1")){
+            Collections.sort(list, new Comparator<Book>() {
+                public int compare(Book o1, Book o2) {
+                    return o1.compareTo(o2);
+                }
+            });
+        }else if (sortType.equals("number") && count.equals("0")){
+                Collections.sort(list, new Comparator<Book>() {
+                    public int compare(Book o1, Book o2) {
+                        return o2.compareTo(o1);
+                    }
+                });
+        }
+        return list;
+    }
     // 跳转添加图书页面
     @RequestMapping(
         value  = "/add",
@@ -68,7 +85,6 @@ public class BookController {
     @RequestMapping(value = "/appoint")
     private String appointBooks(@RequestParam("studentId") long studentId, Model model) {
         List<Appointment> appointList = new ArrayList<Appointment>();
-
         appointList = bookService.getAppointByStu(studentId);
         model.addAttribute("appointList", appointList);
 

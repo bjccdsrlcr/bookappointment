@@ -53,6 +53,11 @@ public interface BookService {
      *
      */
     List<Book> getSomeList(String name);
+
+    /**
+     * @param
+     */
+    List<Book> sortByNumber();
 }
 
 
