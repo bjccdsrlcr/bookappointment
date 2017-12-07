@@ -45,7 +45,7 @@ public interface BookService {
      *
      * @return
      */
-    List<Book> getList();
+    List<Book> getList(int pageNumber, int recordNumber);
 
     /**
      * 按照图书名称查询
@@ -54,10 +54,6 @@ public interface BookService {
      */
     List<Book> getSomeList(String name);
 
-    /**
-     * @param
-     */
-    List<Book> sortByNumber();
 }
 
 

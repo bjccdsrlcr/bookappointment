@@ -46,7 +46,7 @@ public class BookController {
         method = RequestMethod.GET
     )
     private String List(Model model) {
-        List<Book> list = bookService.getList();;
+        List<Book> list = bookService.getList(1,5);;
         model.addAttribute("list", list);
         return "list";
     }
@@ -55,22 +55,42 @@ public class BookController {
     @ResponseBody
     private List<Book> sortedList(Model model, HttpServletRequest request, HttpServletResponse response) {
         String sortType = request.getParameter("sortType");
-        String count = request.getParameter("count");
-        List<Book> list = bookService.getList();
-        // 注意这里不能用sortType == number;
-        if(sortType.equals("number") && count.equals("1")){
+        String secondColumn = request.getParameter("column");
+        String record = request.getParameter("recordNum");
+        List<Book> list = null;
+        Integer pageNumber = Integer.parseInt(secondColumn);
+        Integer recordNumber = Integer.parseInt(record);
+        list = bookService.getList(pageNumber,recordNumber);
+        if(sortType.equals("number")){
             Collections.sort(list, new Comparator<Book>() {
                 public int compare(Book o1, Book o2) {
                     return o1.compareTo(o2);
-                }
-            });
-        }else if (sortType.equals("number") && count.equals("0")){
+                }});
+            }else if (sortType.equals("bookId")){
                 Collections.sort(list, new Comparator<Book>() {
                     public int compare(Book o1, Book o2) {
-                        return o2.compareTo(o1);
+                        return (int)(o1.getBookId() - o2.getBookId());
                     }
                 });
+            }
+        System.out.println(list);
+        return list;
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    @ResponseBody
+    private List<Book> pageList(Model model, HttpServletRequest request, HttpServletResponse response) {
+        String secondColumn = request.getParameter("columnNum");
+        String record = request.getParameter("recordNum");
+        List<Book> list = null;
+        if (secondColumn!=null && record!=null){
+            Integer pageNumber = Integer.parseInt(secondColumn);
+            Integer recordNumber = Integer.parseInt(record);
+            list = bookService.getList(pageNumber,recordNumber);
+        }else {
+            list = bookService.getList(1, 5);
         }
+        System.out.println(list);
         return list;
     }
     // 跳转添加图书页面

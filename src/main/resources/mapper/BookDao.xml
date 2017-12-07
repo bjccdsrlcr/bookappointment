@@ -34,7 +34,7 @@
 			book
 		ORDER BY
 			book_id
-		LIMIT #{offset}, #{limit}
+		LIMIT #{startNumber}, #{recordNum}
 	</select>
 	
 	<update id="reduceNumber">
@@ -50,16 +50,4 @@
 			book(book_id, name, introd, number)
 		VALUES (#{0}, #{1}, #{2}, #{3})
 	</insert>
-
-	<select id="sortByNumber" resultType="com.bjccdsrlcr.appoint.entity.Book">
-		SELECT
-			book_id,
-			name,
-			introd,
-			number
-		FROM
-			book
-		ORDER BY
-			number
-	</select>
 </mapper>

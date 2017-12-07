@@ -13,8 +13,11 @@ public interface BookDao {
 	 */
 	Book queryById(long id);
 	List<Book> querySome(String name);
-	List<Book> queryAll(@Param("offset") int offset, @Param("limit") int limit);
-
+	//startNumber = PageNumber * recordNum,
+	// SELECT * FROM book limit startNumber, recordNum;
+	List<Book> queryAll(@Param("startNumber") int startNumber, @Param("recordNum") int recordNum);
+	// 根据页数和每页的记录筛选记录
+	//List<Book> queryByPageNumber(@Param("pageNumber") int pageNumber, @Param("recordNum") int recordNum);
 	/**
 	 * @param book_id
 	 * @param name
@@ -25,7 +28,6 @@ public interface BookDao {
 	void addBook(long book_id, String name, String introd, int number);
 
 
-	List<Book> sortByNumber();
 	/*减少管存数量
 	 * 用返回值可判断当前库存是否还有书
 	 */

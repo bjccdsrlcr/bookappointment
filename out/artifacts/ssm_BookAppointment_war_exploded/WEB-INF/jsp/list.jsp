@@ -46,9 +46,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th><a id="bookID"></a>图书ID</th>
+                    <th><a id="bookID">图书ID</a><div class="glyphicon glyphicon-arrow-up arrow-up"></div>
+                        <div class="glyphicon glyphicon-arrow-down arrow-down"></div></th>
                     <th>图书名称</th>
-                    <th><a id="number">馆藏数量</a></th>
+                    <th><a id="number">馆藏数量</a><div  class="glyphicon glyphicon-arrow-up arrow-up"></div>
+                        <div class="glyphicon glyphicon-arrow-down arrow-down"></div></th>
                     <th>详细</th>
                 </tr>
                 </thead>
@@ -67,7 +69,22 @@
             </table>
         </div>
 
-
+        <nav aria-label="Page navigation">
+            <ul class="pager pagination-lg">
+                <li>
+                    <a href="#" aria-label="Previous" id="previous"><span aria-hidden="true">&laquo;</span></a>
+                </li>
+                <li><a href="#" id="first-column"></a></li>
+                <li><a href="#" id="second-column"></a></li>
+                <li><a href="#" id="third-column"></a></li>
+                <li><a href="#" id="forth-column"></a></li>
+                <li><a href="#" id="fifth-column"></a></li>
+                <li>
+                <a href="#" aria-label="Next" id="next"><span aria-hidden="true">&raquo;</span></a>
+                </li>
+                <li><input type="text" id="recordNum" value="5"></li>
+            </ul>
+        </nav>
     </div>
 </div>
 
@@ -75,7 +92,6 @@
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
-
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>

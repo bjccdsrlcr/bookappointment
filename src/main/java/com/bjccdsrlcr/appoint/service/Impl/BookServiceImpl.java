@@ -41,8 +41,9 @@ public class BookServiceImpl implements BookService{
 		return bookDao.queryById(bookId);
 	}  
 
-	public List<Book> getList() { 
-		return bookDao.queryAll(0, 1000);
+	public List<Book> getList(int pageNumber, int recordNumber) {
+		int startNumber = (pageNumber-1) * recordNumber + 1;
+		return bookDao.queryAll(startNumber, recordNumber);
 	}
 	public Student validateStu(String studentId, String password){
 		return studentDao.quaryStudent(studentId, password);
@@ -54,9 +55,6 @@ public class BookServiceImpl implements BookService{
 		return bookDao.querySome(name);
 	}
 
-	public List<Book> sortByNumber() {
-		return bookDao.sortByNumber();
-	}
 
 	public List<Appointment> getAppointByStu(long studentId) {
 		return appointmentDao.query(studentId);
