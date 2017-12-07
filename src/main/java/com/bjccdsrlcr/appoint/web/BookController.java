@@ -57,22 +57,36 @@ public class BookController {
         String sortType = request.getParameter("sortType");
         String secondColumn = request.getParameter("column");
         String record = request.getParameter("recordNum");
+        String adescValue = request.getParameter("adescValue");
+        System.out.println("secondColumn:::-------" + secondColumn);
+        System.out.println("adescValue:-========" + adescValue);
         List<Book> list = null;
         Integer pageNumber = Integer.parseInt(secondColumn);
         Integer recordNumber = Integer.parseInt(record);
         list = bookService.getList(pageNumber,recordNumber);
-        if(sortType.equals("number")){
+        if(sortType.equals("number")&&adescValue.equals("1")){
             Collections.sort(list, new Comparator<Book>() {
                 public int compare(Book o1, Book o2) {
                     return o1.compareTo(o2);
                 }});
-            }else if (sortType.equals("bookId")){
+            }else if (sortType.equals("number")&&adescValue.equals("0")){
+            Collections.sort(list, new Comparator<Book>() {
+                public int compare(Book o1, Book o2) {
+                    return o2.compareTo(o1);
+                }});
+        } else if (sortType.equals("bookId")&&adescValue.equals("1")){
                 Collections.sort(list, new Comparator<Book>() {
                     public int compare(Book o1, Book o2) {
                         return (int)(o1.getBookId() - o2.getBookId());
                     }
                 });
-            }
+            }else if (sortType.equals("bookId")&&adescValue.equals("0")){
+                Collections.sort(list, new Comparator<Book>() {
+                    public int compare(Book o1, Book o2) {
+                        return (int)(o2.getBookId() - o1.getBookId());
+                    }
+                });
+        }
         System.out.println(list);
         return list;
     }

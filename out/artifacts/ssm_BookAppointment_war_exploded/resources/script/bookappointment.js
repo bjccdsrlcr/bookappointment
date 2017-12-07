@@ -80,7 +80,8 @@ var bookappointment = {
         sortList: function (sortType) {
             var sortUrl = '/books/sort';
             var params = {};
-            var column = 0;
+            var column = 1;
+            console.log("FLAG:--" + flag);
             switch(flag){
                 case 1:
                     column = $(firstColumn).text();
@@ -102,14 +103,16 @@ var bookappointment = {
             }
             var recordNum = $('#recordNum').val();
             console.log("column:" + column +"\t recordNum: " + recordNum);
+            params['sortType'] = sortType;
+            params['column'] = column;
+            params['recordNum'] = recordNum;
             //升序
             if (adescValue == 1) {
                 $('.arrow-up').show();
                 $('.arrow-down').hide();
-                params['sortType'] = sortType;
-                params['column'] = column;
-                params['recordNum'] = recordNum;
                 $('#bookList').empty();
+                console.log(adescValue);
+                params['adescValue'] = adescValue;
                 $.ajax({
                     type: 'get',
                     url: sortUrl,
@@ -117,7 +120,7 @@ var bookappointment = {
                     async: false,
                     success: function (result) {
                         $(function () {
-                            sortList = result;
+                            console.log("result----------------" + result);
                             for (var i = 0; i < result.length; i++) {
                                 $('#bookList').append(
                                     '<tr>' +
@@ -134,24 +137,31 @@ var bookappointment = {
                 adescValue = 0;
             } else if (adescValue == 0) {
                 // 从后台获取降序的数据；
-                // 不需要通过ajax， 代码太繁琐， 虽然后台实现了逻辑，不如直接在js里面实现
                 $('.arrow-down').show();
                 $('.arrow-up').hide();
                 $('#bookList').empty();
-                var result = sortList.reverse();
-                console.log(result);
-                for (var i = 0; i < result.length; i++) {
-                    console.log(result[i].number);
-                    $('#bookList').append(
-                        '<tr>' +
-                        '<td> ' + result[i].bookId + '</td>' +
-                        '<td> ' + result[i].name + ' </td>' +
-                        '<td> ' + result[i].number + '</td>' +
-                        '<td><a class="btn btn-info" href="/books/' + result[i].bookId + '/detail" >详细</a></td>' +
-                        '</tr>');
-                }
-                console.log(result.length);
-                $('#bookList').html();
+                params['adescValue'] = adescValue;
+                $.ajax({
+                    type: 'get',
+                    url: sortUrl,
+                    data: params,
+                    async: false,
+                    success: function (result) {
+                        $(function () {
+                            for (var i = 0; i < result.length; i++) {
+                                $('#bookList').append(
+                                    '<tr>' +
+                                    '<td> ' + result[i].bookId + '</td>' +
+                                    '<td> ' + result[i].name + ' </td>' +
+                                    '<td> ' + result[i].number + '</td>' +
+                                    '<td><a class="btn btn-info" href="/books/' + result[i].bookId + '/detail" >详细</a></td>' +
+                                    '</tr>');
+                            }
+                            $('#bookList').html();
+                        });
+                    }
+                });
+                adescValue = 1;
             }
         },
         init: function () {
@@ -180,7 +190,6 @@ var bookappointment = {
                 bookappointment.list.sortList("bookId");
             });
             //翻页组件设计
-
             var firstNumber = 1, secondNumber = 2, thirdNumber = 3, forthNumber = 4, fifthNumber = 5, recordNum = 5;
             bookappointment.list.pageCompomentInit(firstNumber, secondNumber, thirdNumber, forthNumber, fifthNumber, recordNum);
             $('#next').click(function () {

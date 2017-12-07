@@ -64,8 +64,7 @@
                     </tr>
                 </c:forEach>
                 </tbody>
-                <tbody id="asecList"></tbody>
-                <tbody id="descList"></tbody>
+
             </table>
         </div>
 
