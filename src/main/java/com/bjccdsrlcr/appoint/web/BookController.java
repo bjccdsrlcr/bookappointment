@@ -58,8 +58,6 @@ public class BookController {
         String secondColumn = request.getParameter("column");
         String record = request.getParameter("recordNum");
         String adescValue = request.getParameter("adescValue");
-        System.out.println("secondColumn:::-------" + secondColumn);
-        System.out.println("adescValue:-========" + adescValue);
         List<Book> list = null;
         Integer pageNumber = Integer.parseInt(secondColumn);
         Integer recordNumber = Integer.parseInt(record);

@@ -81,7 +81,7 @@
                 <li>
                 <a href="#" aria-label="Next" id="next"><span aria-hidden="true">&raquo;</span></a>
                 </li>
-                <li><input type="text" id="recordNum" value="5"></li>
+                <li><span>输入每页显示的条数</span><input type="text" id="recordNum"></li>
             </ul>
         </nav>
     </div>
