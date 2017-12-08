@@ -60,8 +60,13 @@ public class BookController {
         String adescValue = request.getParameter("adescValue");
         List<Book> list = null;
         Integer pageNumber = Integer.parseInt(secondColumn);
+        // 默认一页显示的条数为5条
+        if (record.equals("")){
+            record = "5";
+        }
         Integer recordNumber = Integer.parseInt(record);
         list = bookService.getList(pageNumber,recordNumber);
+        //Integer adescValue = Integer.parseInt(value);
         if(sortType.equals("number")&&adescValue.equals("1")){
             Collections.sort(list, new Comparator<Book>() {
                 public int compare(Book o1, Book o2) {
@@ -85,7 +90,7 @@ public class BookController {
                     }
                 });
         }
-        System.out.println(list);
+        //System.out.println(list);
         return list;
     }
 
@@ -95,7 +100,10 @@ public class BookController {
         String secondColumn = request.getParameter("columnNum");
         String record = request.getParameter("recordNum");
         List<Book> list = null;
-        if (secondColumn!=null && record!=null){
+        if (record.equals("")){
+            record = "5";
+        }
+        if (secondColumn!=null){
             Integer pageNumber = Integer.parseInt(secondColumn);
             Integer recordNumber = Integer.parseInt(record);
             list = bookService.getList(pageNumber,recordNumber);

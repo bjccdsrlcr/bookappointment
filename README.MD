@@ -48,3 +48,5 @@
 ![list](https://github.com/bjccdsrlcr/bookappointment/blob/master/imgfolder/applist.png)
 
 ![list](https://github.com/bjccdsrlcr/bookappointment/blob/master/imgfolder/appoint.png)
+
+分页组件代码太冗余了，可以优化一下...

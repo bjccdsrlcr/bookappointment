@@ -48,7 +48,8 @@
                 <tr>
                     <th><a id="bookID">图书ID</a><div class="glyphicon glyphicon-arrow-up arrow-up"></div>
                         <div class="glyphicon glyphicon-arrow-down arrow-down"></div></th>
-                    <th>图书名称</th>
+                    <th><a id="name">图书名称</a><div class="glyphicon glyphicon-arrow-up arrow-up"></div>
+                        <div class="glyphicon glyphicon-arrow-down arrow-down"></div></th>
                     <th><a id="number">馆藏数量</a><div  class="glyphicon glyphicon-arrow-up arrow-up"></div>
                         <div class="glyphicon glyphicon-arrow-down arrow-down"></div></th>
                     <th>详细</th>
@@ -73,15 +74,15 @@
                 <li>
                     <a href="#" aria-label="Previous" id="previous"><span aria-hidden="true">&laquo;</span></a>
                 </li>
-                <li><a href="#" id="first-column"></a></li>
-                <li><a href="#" id="second-column"></a></li>
-                <li><a href="#" id="third-column"></a></li>
-                <li><a href="#" id="forth-column"></a></li>
-                <li><a href="#" id="fifth-column"></a></li>
+                <li><a href="#" id="first-column" class="columnFlag"></a></li>
+                <li><a href="#" id="second-column" class="columnFlag"></a></li>
+                <li><a href="#" id="third-column" class="columnFlag"></a></li>
+                <li><a href="#" id="forth-column" class="columnFlag"></a></li>
+                <li><a href="#" id="fifth-column" class="columnFlag"></a></li>
                 <li>
                 <a href="#" aria-label="Next" id="next"><span aria-hidden="true">&raquo;</span></a>
                 </li>
-                <li><span>输入每页显示的条数</span><input type="text" id="recordNum"></li>
+                <li><span>输入每页显示的条数</span><input type="text" id="recordNum" value="5"></li>
             </ul>
         </nav>
     </div>

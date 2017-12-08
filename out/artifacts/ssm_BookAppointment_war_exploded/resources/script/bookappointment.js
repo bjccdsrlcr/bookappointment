@@ -111,7 +111,6 @@ var bookappointment = {
                 $('.arrow-up').show();
                 $('.arrow-down').hide();
                 $('#bookList').empty();
-                console.log(adescValue);
                 params['adescValue'] = adescValue;
                 $.ajax({
                     type: 'get',
@@ -120,7 +119,6 @@ var bookappointment = {
                     async: false,
                     success: function (result) {
                         $(function () {
-                            console.log("result----------------" + result);
                             for (var i = 0; i < result.length; i++) {
                                 $('#bookList').append(
                                     '<tr>' +
@@ -179,8 +177,8 @@ var bookappointment = {
                 $.cookie('password', '', {path: '/books'});
             });
             // 排序
+            //设置标志位判断当前的顺序是顺序还是逆序
             adescValue = 1;
-            sortList = [];
             $('.arrow-down').hide();
             $('.arrow-up').hide();
             $('#number').click(function () {
@@ -189,7 +187,23 @@ var bookappointment = {
             $('#bookID').click(function () {
                 bookappointment.list.sortList("bookId");
             });
+            $('.columnFlag li').each(function (index, element) {
+               var text = element.text();
+               console.log(text)
+            });
+            // $('#name').click(function () {
+            //    bookappointment.list.sortList("name");
+            // });
             //翻页组件设计
+            var myMap = new Map();
+
+            //塞入键值对
+            myMap.set('firstNumber', 1);
+            myMap.set('secondNumber', 2);
+            //遍历
+            myMap.forEach(function(value, key) {
+                console.log(key + ' = ' + value);
+            });
             var firstNumber = 1, secondNumber = 2, thirdNumber = 3, forthNumber = 4, fifthNumber = 5, recordNum = 5;
             bookappointment.list.pageCompomentInit(firstNumber, secondNumber, thirdNumber, forthNumber, fifthNumber, recordNum);
             $('#next').click(function () {
@@ -208,11 +222,7 @@ var bookappointment = {
                 $('#third-column').text(thirdNumber - 5);
                 $('#forth-column').text(forthNumber - 5);
                 $('#fifth-column').text(fifthNumber - 5);
-                firstNumber -= 5;
-                secondNumber -= 5;
-                thirdNumber -= 5;
-                forthNumber -= 5;
-                fifthNumber -= 5;
+                firstNumber -= 5;secondNumber -= 5;thirdNumber -= 5;forthNumber -= 5;fifthNumber -= 5;
                 if (fifthNumber <= 5) {
                     $('#previous').hide();
                 }
